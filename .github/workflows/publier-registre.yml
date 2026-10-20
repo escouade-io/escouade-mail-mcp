@@ -1,0 +1,26 @@
+# Inscrit le serveur au registre MCP officiel (registry.modelcontextprotocol.io), sans clé :
+# le registre fait confiance à l'identité OIDC de ce dépôt pour l'espace io.github.escouade-io.
+# Se lance à la main (Actions → Publier au registre MCP → Run workflow) ou à chaque étiquette v*.
+name: Publier au registre MCP
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: mcp-publisher
+        run: curl -fsSL https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz | tar xz mcp-publisher
+      - name: Connexion par l'identité du dépôt
+        run: ./mcp-publisher login github-oidc
+      - name: Publication de server.json
+        run: ./mcp-publisher publish
