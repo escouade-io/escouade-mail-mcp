@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "escouade-mail": {
+      "httpUrl": "https://api.subagent.fr/mcp",
+      "headers": {
+        "Authorization": "Bearer $SUBAGENT_KEY"
+      }
+    }
+  }
+}

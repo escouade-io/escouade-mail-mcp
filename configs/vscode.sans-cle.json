@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "escouade-mail": {
+      "type": "http",
+      "url": "https://api.subagent.fr/mcp"
+    }
+  }
+}
